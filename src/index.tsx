@@ -4,12 +4,12 @@ import * as esbuild from 'esbuild-wasm'
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin'
 
 const App = () => {
-  const ref = useRef<any>()
+  const esBuildRef = useRef<any>()
   const [input, setInput] = useState('')
   const [code, setCode] = useState('')
 
   const startService = async () => {
-    ref.current = await esbuild.startService({
+    esBuildRef.current = await esbuild.startService({
       worker: true,
       wasmURL: '/esbuild.wasm'
     })
@@ -21,9 +21,9 @@ const App = () => {
 
 
   const onClick = async () => {
-    if (!ref.current) return
+    if (!esBuildRef.current) return
 
-    const result = await ref.current.build({
+    const result = await esBuildRef.current.build({
       entryPoints: ['index.js'],
       bundle: true,
       write: false,
