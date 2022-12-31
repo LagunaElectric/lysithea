@@ -70,7 +70,6 @@ const App = () => {
     <div>
       <button onClick={ onClick }>submit</button>
     </div>
-    <pre>{ code }</pre>
     <iframe sandbox='allow-scripts' title="test" srcDoc={ html } ref={ iframe } />
   </div>
 }
