@@ -6,6 +6,7 @@ import { unpkgPathPlugin } from './plugins/unpkg-path-plugin'
 
 const App = () => {
   const esBuildRef = useRef<any>()
+  const iframe = useRef<any>()
   const [input, setInput] = useState('')
   const [code, setCode] = useState('')
 
@@ -38,13 +39,22 @@ const App = () => {
       }
     })
 
-    setCode(result.outputFiles[0].text)
+    iframe.current.contentWindow.postMessage(result.outputFiles[0].text, '*')
   }
 
   const html = `
-    <script>
-      ${code}
-    </script>
+    <html>
+      <head></head>
+      <body>
+        <div id="root"></div>
+        <script>
+          window.addEventListener('message', (event) => {
+            eval(event.data)
+          }, false)
+        </script>
+      </body>
+    </html>
+
   `
 
   return <div>
@@ -53,7 +63,7 @@ const App = () => {
       <button onClick={ onClick }>submit</button>
     </div>
     <pre>{ code }</pre>
-    <iframe sandbox='allow-scripts' title="test" srcDoc={ html } />
+    <iframe sandbox='allow-scripts' title="test" srcDoc={ html } ref={ iframe } />
   </div>
 }
 
