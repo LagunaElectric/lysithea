@@ -25,6 +25,8 @@ const App = () => {
   const onClick = async () => {
     if (!esBuildRef.current) return
 
+    iframe.current.srcdoc = html
+
     const result = await esBuildRef.current.build({
       entryPoints: ['index.js'],
       bundle: true,
@@ -49,7 +51,13 @@ const App = () => {
         <div id="root"></div>
         <script>
           window.addEventListener('message', (event) => {
-            eval(event.data)
+            try {
+              eval(event.data)
+            } catch (err) {
+              const root = document.querySelector('#root')
+              root.innerHTML = '<div style="color: red;"><h4>Runtime Error</h4>' + err + '</div>'
+              console.error(err)
+            }
           }, false)
         </script>
       </body>
