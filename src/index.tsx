@@ -3,6 +3,7 @@ import * as esbuild from 'esbuild-wasm'
 import { useEffect, useState, useRef } from 'react'
 import { fetchPlugin } from './plugins/fetch-plugin'
 import { unpkgPathPlugin } from './plugins/unpkg-path-plugin'
+import CodeEditor from './components/code-editor'
 
 const App = () => {
   const esBuildRef = useRef<any>()
@@ -66,6 +67,7 @@ const App = () => {
   `
 
   return <div>
+    <CodeEditor />
     <textarea value={ input } onChange={ e => setInput(e.currentTarget.value) }></textarea>
     <div>
       <button onClick={ onClick }>submit</button>
