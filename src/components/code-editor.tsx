@@ -3,6 +3,9 @@ import prettier from 'prettier'
 import parser from 'prettier/parser-babel'
 import MonacoEditor, { EditorDidMount } from '@monaco-editor/react'
 
+import './code-editor.css'
+import 'bulmaswatch/superhero/bulmaswatch.min.css'
+
 interface CodeEditorProps {
   initialValue: string
   onChange(value: string): void
@@ -27,14 +30,14 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ initialValue, onChange }) => {
       useTabs: false,
       semi: false,
       singleQuote: true
-    })
+    }).replace(/\n$/, '')
 
     editorRef.current.setValue(formatted)
   }
 
   return (
-    <>
-      <button onClick={ onFormatClick }>Format</button>
+    <div className='editor-wrapper'>
+      <button className='button button-format is-primary is-small' onClick={ onFormatClick }>Format</button>
       <MonacoEditor
         editorDidMount={ onEditorDidMount }
         value={ initialValue }
@@ -54,7 +57,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ initialValue, onChange }) => {
           }
         }
       />
-    </>
+    </div>
   )
 }
 
