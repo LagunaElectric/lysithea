@@ -1,30 +1,13 @@
-import Bundler from './bundler'
-import Preview from './components/preview'
 import { createRoot } from 'react-dom/client'
-import CodeEditor from './components/code-editor'
-import { useState } from 'react'
+import CodeCell from './components/code-cell'
 import 'bulmaswatch/superhero/bulmaswatch.min.css'
 
 const App = () => {
-  const [input, setInput] = useState('')
-  const [code, setCode] = useState('')
-
-  const onClick = async () => {
-    const output = await Bundler(input)
-    setCode(output)
-  }
-
-
-  return <div>
-    <CodeEditor
-      initialValue='// code'
-      onChange={ value => setInput(value) }
-    />
+  return (
     <div>
-      <button onClick={ onClick }>submit</button>
+      <CodeCell />
     </div>
-    <Preview code={ code } />
-  </div>
+  )
 }
 
 const root = createRoot(document.getElementById('root')!)
