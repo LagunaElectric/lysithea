@@ -3,6 +3,7 @@ import Preview from './components/preview'
 import { createRoot } from 'react-dom/client'
 import CodeEditor from './components/code-editor'
 import { useState } from 'react'
+import 'bulmaswatch/superhero/bulmaswatch.min.css'
 
 const App = () => {
   const [input, setInput] = useState('')
