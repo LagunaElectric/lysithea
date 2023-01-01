@@ -2,7 +2,10 @@ import { useRef } from 'react'
 import prettier from 'prettier'
 import parser from 'prettier/parser-babel'
 import MonacoEditor, { EditorDidMount } from '@monaco-editor/react'
+import codeShift from 'jscodeshift'
+import Highlighter from 'monaco-jsx-highlighter'
 
+import './syntax.css'
 import './code-editor.css'
 import 'bulmaswatch/superhero/bulmaswatch.min.css'
 
@@ -20,6 +23,20 @@ const CodeEditor: React.FC<CodeEditorProps> = ({ initialValue, onChange }) => {
       onChange(getValue())
     })
     monacoEditor.getModel()?.updateOptions({ tabSize: 2 })
+
+    const highlighter = new Highlighter(
+      // @ts-ignore
+      window.monaco,
+      codeShift,
+      monacoEditor
+    )
+
+    highlighter.highLightOnDidChangeModelContent(
+      () => { },
+      () => { },
+      undefined,
+      () => { }
+    )
   }
 
   const onFormatClick = () => {
