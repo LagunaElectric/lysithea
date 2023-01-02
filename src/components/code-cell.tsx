@@ -1,12 +1,23 @@
 import Bundler from '../bundler'
 import Preview from './preview'
 import CodeEditor from './code-editor'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Resizable from './resizable'
 
 const CodeCell = () => {
   const [input, setInput] = useState('')
   const [code, setCode] = useState('')
+
+  useEffect(() => {
+    const timer = setTimeout(async () => {
+      const output = await Bundler(input)
+      setCode(output)
+    }, 1000)
+
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [input])
 
   const onClick = async () => {
     const output = await Bundler(input)
