@@ -19,12 +19,6 @@ const CodeCell = () => {
     }
   }, [input])
 
-  const onClick = async () => {
-    const output = await Bundler(input)
-    setCode(output)
-  }
-
-
   return <div>
     <Resizable direction='vertical'>
       <div style={ {
