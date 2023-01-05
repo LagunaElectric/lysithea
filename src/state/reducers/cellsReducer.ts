@@ -29,9 +29,7 @@ const reducer = (
       return state
     case ActionType.MOVE_CELL:
       return state
-    case ActionType.INSERT_CELL_AFTER:
-      return state
-    case ActionType.INSERT_CELL_BEFORE:
+    case ActionType.INSERT_CELL:
       return state
     default:
       return state
