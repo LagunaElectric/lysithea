@@ -42,10 +42,31 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
       state.order[targetIndex] = action.payload.id
       break
     case ActionType.INSERT_CELL:
-      return state
+      const cell: Cell = {
+        content: "",
+        type: action.payload.type,
+        id: randomId()
+      }
+
+      state.data[cell.id] = cell
+
+      const foundIndex = state.order.findIndex((id) => id === action.payload.id)
+
+      if (foundIndex < 0) {
+        state.order.unshift(cell.id)
+      } else {
+        const targetIndex =
+          action.payload.direction === "up" ? foundIndex : foundIndex + 1
+        state.order.splice(targetIndex, 0, cell.id)
+      }
+      break
     default:
       return state
   }
 })
+
+const randomId = () => {
+  return Math.random().toString(36).substring(2, 5)
+}
 
 export default reducer
