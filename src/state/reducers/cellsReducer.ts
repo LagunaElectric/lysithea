@@ -1,7 +1,7 @@
 import produce from "immer"
 import { ActionType } from "../action-types"
 import { Action } from "../actions"
-import Cell from "../cell"
+import { Cell } from "../cell"
 
 interface CellsState {
   loading: boolean
