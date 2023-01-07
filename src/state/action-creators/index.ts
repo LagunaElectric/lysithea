@@ -35,7 +35,7 @@ export const moveCell = (id: string, direction: Direction): MoveCellAction => {
   }
 }
 export const insertCell = (
-  id: string,
+  id: string | null,
   cellType: CellTypes,
   direction: Direction
 ): InsertCellAction => {

@@ -53,7 +53,7 @@ const reducer = produce((state: CellsState = initialState, action: Action) => {
       const foundIndex = state.order.findIndex((id) => id === action.payload.id)
 
       if (foundIndex < 0) {
-        state.order.unshift(cell.id)
+        state.order.push(cell.id)
       } else {
         const targetIndex =
           action.payload.direction === "up" ? foundIndex : foundIndex + 1
