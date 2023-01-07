@@ -1,4 +1,5 @@
 import { useActions } from "../hooks/use-actions"
+import './action-bar.css'
 
 interface ActionBarProps {
   id: string
@@ -9,7 +10,7 @@ const ActionBar: React.FC<ActionBarProps> = ({ id }) => {
 
   // TODO: refactor buttons to their own component
   return (
-    <div>
+    <div className="action-bar">
       <button className="button is-primary is-small" onClick={ () => moveCell(id, 'up') }>
         <span className="icon">
           <i className="fas fa-arrow-up" />
