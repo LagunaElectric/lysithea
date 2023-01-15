@@ -10,6 +10,7 @@
   "author": "Ronald Jimmy Headrick III <rockbladej99@gmail.com>",
   "license": "GPL-3.0-only",
   "dependencies": {
-    "commander": "^10.0.0"
+    "commander": "^10.0.0",
+    "local-api": "^1.0.0"
   }
 }
