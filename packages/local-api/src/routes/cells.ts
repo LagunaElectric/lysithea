@@ -8,17 +8,37 @@ interface Cell {
   type: "text" | "code"
 }
 
+interface LocalApiError {
+  code: string
+}
+
 export const createCellsRouter = (filename: string, dir: string) => {
   const router = express.Router()
+  const fullPath = path.join(dir, filename)
 
   router.get("/cells", async (req, res) => {
     res.send("List of Cells")
+    const isLocalApiError = (err: any): err is LocalApiError => {
+      return typeof err.code === "string"
+    }
+
+    try {
+      const result = await fs.readFile(fullPath, { encoding: "utf-8" })
+    } catch (err) {
+      if (isLocalApiError(err)) {
+        if (err.code === "ENOENT") {
+          // await fs.writeFile(fullPath, "[]", "utf-8")
+        } else {
+          throw err
+        }
+      }
+    }
   })
 
   router.post("/cells", async (req, res) => {
     const { cells }: { cells: Cell[] } = req.body
 
-    await fs.writeFile(path.join(dir, filename), JSON.stringify(cells), "utf-8")
+    await fs.writeFile(fullPath, JSON.stringify(cells), "utf-8")
 
     res.send({ status: "ok" })
   })
