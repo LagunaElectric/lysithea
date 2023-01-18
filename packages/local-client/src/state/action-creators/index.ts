@@ -1,14 +1,14 @@
 import { Dispatch } from "redux"
 import { ActionType } from "../action-types"
 import {
+  Action,
   UpdateCellAction,
   DeleteCellAction,
   MoveCellAction,
   InsertCellAction,
   BundleStartAction,
   BundleCompleteAction,
-  Direction,
-  SaveCellsErrorAction
+  Direction
 } from "../actions"
 import { Cell, CellTypes } from "../cell"
 import Bundler from "../../bundler"
@@ -103,10 +103,7 @@ export const fetchCells = () => {
 }
 
 export const saveCells = () => {
-  return async (
-    dispatch: Dispatch<SaveCellsErrorAction>,
-    getState: () => RootState
-  ) => {
+  return async (dispatch: Dispatch<Action>, getState: () => RootState) => {
     const {
       cells: { data, order }
     } = getState()
