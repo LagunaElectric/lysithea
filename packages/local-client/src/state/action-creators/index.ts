@@ -7,11 +7,13 @@ import {
   InsertCellAction,
   BundleStartAction,
   BundleCompleteAction,
-  Direction
+  Direction,
+  SaveCellsErrorAction
 } from "../actions"
 import { Cell, CellTypes } from "../cell"
 import Bundler from "../../bundler"
 import axios from "axios"
+import { RootState } from "../reducers"
 
 export const updateCell = (id: string, content: string): UpdateCellAction => {
   return {
@@ -93,6 +95,30 @@ export const fetchCells = () => {
       if (err instanceof Error) {
         dispatch({
           type: ActionType.FETCH_CELLS_ERROR,
+          payload: err.message
+        })
+      }
+    }
+  }
+}
+
+export const saveCells = () => {
+  return async (
+    dispatch: Dispatch<SaveCellsErrorAction>,
+    getState: () => RootState
+  ) => {
+    const {
+      cells: { data, order }
+    } = getState()
+
+    const cells = order.map(id => data[id])
+
+    try {
+      await axios.post("/cells", { cells })
+    } catch (err) {
+      if (err instanceof Error) {
+        dispatch({
+          type: ActionType.SAVE_CELLS_ERROR,
           payload: err.message
         })
       }
