@@ -1,5 +1,5 @@
 {
-  "name": "cli",
+  "name": "lysithea",
   "version": "1.0.0",
   "description": "",
   "scripts": {
@@ -11,7 +11,7 @@
   "license": "GPL-3.0-only",
   "dependencies": {
     "commander": "^10.0.0",
-    "local-api": "^1.0.0"
+    "@lysithea/local-api": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^18.11.18",
