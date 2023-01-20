@@ -1,6 +1,6 @@
 {
   "name": "@lysithea/local-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -18,7 +18,7 @@
   "author": "Ronald Jimmy Headrick III <rockbladej99@gmail.com>",
   "license": "GPL-3.0-only",
   "dependencies": {
-    "@lysithea/local-client": "^1.0.1",
+    "@lysithea/local-client": "^1.0.2",
     "cors": "^2.8.5",
     "express": "^4.18.2",
     "http-proxy-middleware": "^2.0.6"
