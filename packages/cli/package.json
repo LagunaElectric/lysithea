@@ -1,6 +1,6 @@
 {
   "name": "lysithea",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "",
   "files": [
     "dist"
@@ -17,10 +17,10 @@
   "author": "Ronald Jimmy Headrick III <rockbladej99@gmail.com>",
   "license": "GPL-3.0-only",
   "dependencies": {
-    "@lysithea/local-client": "^1.0.2"
+    "@lysithea/local-client": "^1.0.3"
   },
   "devDependencies": {
-    "@lysithea/local-api": "^1.0.2",
+    "@lysithea/local-api": "^1.0.3",
     "@types/node": "^18.11.18",
     "commander": "^10.0.0",
     "esbuild": "0.8.26",

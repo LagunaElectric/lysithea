@@ -1,6 +1,6 @@
 {
   "name": "@lysithea/local-client",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Ronald Jimmy Headrick III <rockbladej99@gmail.com>",
   "files": [
     "build"
