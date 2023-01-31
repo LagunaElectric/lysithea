@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from "react"
-import { useActions } from "../hooks/use-actions"
 import MDEditor from "@uiw/react-md-editor"
-import { Cell } from "../state"
+import { Cell } from "../redux/slices/cellsSlice/cells"
 import './text-editor.css'
+import { useAppDispatch } from "../redux/hooks"
+import { updateCell } from "../redux/slices/cellsSlice/cellsSlice"
 
 interface TextEditorProps {
   cell: Cell
@@ -11,7 +12,8 @@ interface TextEditorProps {
 const TextEditor: React.FC<TextEditorProps> = ({ cell }) => {
   const [editing, setEditing] = useState(false)
   const editorRef = useRef<HTMLDivElement | null>(null)
-  const { updateCell } = useActions()
+  const dispatch = useAppDispatch()
+  //const { updateCell } = useActions()
 
   useEffect(() => {
     const listener = (event: MouseEvent) => {
@@ -37,7 +39,7 @@ const TextEditor: React.FC<TextEditorProps> = ({ cell }) => {
   if (editing) {
     return (
       <div ref={ editorRef } className='text-editor'>
-        <MDEditor value={ cell.content } onChange={ (val) => updateCell(cell.id, val || '') } />
+        <MDEditor value={ cell.content } onChange={ (val) => dispatch(updateCell({ id: cell.id, content: val || '' })) } />
       </div>
     )
   }

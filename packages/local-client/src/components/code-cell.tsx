@@ -2,36 +2,39 @@ import Preview from './preview'
 import CodeEditor from './code-editor'
 import { useEffect } from 'react'
 import Resizable from './resizable'
-import { Cell } from '../state'
-import { useActions } from '../hooks/use-actions'
-import { useTypedSelector } from '../hooks/use-typed-selector'
+import { Cell } from '../redux/slices/cellsSlice/cells'
 import { useCumulativeCode } from '../hooks/use-cumulative-code'
 import './code-cell.css'
+import { useAppDispatch, useAppSelector } from '../redux/hooks'
+import { bundleStart } from '../redux/slices/bundlesSlice/bundlesSlice'
+import { updateCell } from '../redux/slices/cellsSlice/cellsSlice'
 
 interface CodeCellProps {
   cell: Cell
 }
 
 const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
-  const { updateCell, createBundle } = useActions()
-  const bundle = useTypedSelector(state => state.bundles[cell.id])
+  //const { updateCell, createBundle } = useActions()
+  const dispatch = useAppDispatch();
+  const bundle = useAppSelector(state => state.bundles[cell.id])
+  //const bundle = useTypedSelector(state => state.bundles[cell.id])
   const cumulativeCode = useCumulativeCode(cell.id)
 
   useEffect(() => {
     if (!bundle) {
-      createBundle(cell.id, cumulativeCode)
+      dispatch(bundleStart({ cellId: cell.id, input: cumulativeCode }))
       return
     }
 
     const timer = setTimeout(async () => {
-      createBundle(cell.id, cumulativeCode)
+      dispatch(bundleStart({ cellId: cell.id, input: cumulativeCode }))
     }, 1000)
 
     return () => {
       clearTimeout(timer)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cell.id, cumulativeCode, createBundle])
+  }, [cell.id, cumulativeCode, bundleStart])
 
   return <div>
     <Resizable direction='vertical'>
@@ -43,7 +46,7 @@ const CodeCell: React.FC<CodeCellProps> = ({ cell }) => {
         <Resizable direction="horizontal">
           <CodeEditor
             initialValue={ cell.content }
-            onChange={ value => updateCell(cell.id, value) }
+            onChange={ value => dispatch(updateCell({ id: cell.id, content: value })) }
           />
         </Resizable>
         <div className="progress-wrapper">

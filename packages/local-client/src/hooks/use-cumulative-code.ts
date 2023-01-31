@@ -1,9 +1,9 @@
-import { useTypedSelector } from "./use-typed-selector"
+import { useAppSelector } from "../redux/hooks"
 
 export const useCumulativeCode = (cellId: string) => {
-  return useTypedSelector((state) => {
+  return useAppSelector(state => {
     const { data, order } = state.cells
-    const orderedCells = order.map((id) => data[id])
+    const orderedCells = order.map(id => data[id])
 
     const showFunc = `
         import _React from 'react'

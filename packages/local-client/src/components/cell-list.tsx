@@ -1,16 +1,18 @@
-import { useTypedSelector } from "../hooks/use-typed-selector"
 import CellListItem from "./cell-list-item"
 import AddCell from "./add-cell"
 import { Fragment, useEffect } from "react"
-import { useActions } from "../hooks/use-actions"
 import './cell-list.css'
+import { useAppSelector, useAppDispatch } from "../redux/hooks"
+import { fetchCells } from "../redux/slices/cellsSlice/cellsSlice"
 
 const CellList: React.FC = () => {
-  const cells = useTypedSelector(({ cells: { order, data } }) => order.map((id) => data[id]))
-  const { fetchCells } = useActions()
+  const cells = useAppSelector(({ cells: { order, data } }) => order.map((id) => data[id]))
+  // const cells = useTypedSelector(({ cells: { order, data } }) => order.map((id) => data[id]))
+  // const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    fetchCells()
+    dispatch(fetchCells())
   }, [])
 
   const renderedCells = cells.map((cell) => (
