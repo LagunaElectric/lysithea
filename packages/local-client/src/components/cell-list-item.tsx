@@ -1,4 +1,4 @@
-import { Cell } from "../state"
+import { Cell } from '../redux/slices/cellsSlice/cells'
 import ActionBar from "./action-bar"
 import CodeCell from "./code-cell"
 import TextEditor from "./text-editor"
