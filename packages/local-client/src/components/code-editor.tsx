@@ -7,7 +7,6 @@ import Highlighter from 'monaco-jsx-highlighter'
 
 import './syntax.css'
 import './code-editor.css'
-import 'bulmaswatch/superhero/bulmaswatch.min.css'
 
 interface CodeEditorProps {
   initialValue: string
