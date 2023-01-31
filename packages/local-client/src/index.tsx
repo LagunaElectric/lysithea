@@ -9,7 +9,7 @@ import './index.css'
 const App = () => {
   return (
     <Provider store={ store }>
-      <div>
+      <div className='bg-slate-600'>
         <CellList />
       </div>
     </Provider>
